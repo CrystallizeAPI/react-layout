@@ -21,7 +21,7 @@
     "babel-register": "^6.26.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build": "babel src/module -d dist",
