@@ -1,7 +1,7 @@
 {
   "name": "@crystallize/react-layout",
   "description": "Helpers for setting up main layout with side menus",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "private": false,
   "dependencies": {
