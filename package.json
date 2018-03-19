@@ -3,10 +3,13 @@
   "description": "Helpers for setting up main layout with side menus",
   "version": "0.0.3",
   "main": "dist/index.js",
-  "scripts": {
-    "build": "babel src -d dist",
-    "dev": "babel src -w -d dist",
-    "prepare": "npm run build"
+  "private": false,
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1",
+    "tiny-emitter": "^2.0.2",
+    "styled-components": "^3.2.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -15,12 +18,13 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "babel-register": "^6.26.0",
-    "react": "^16.2.0",
-    "react-test-renderer": "^16.2.0"
+    "babel-register": "^6.26.0"
   },
-  "dependencies": {
-    "tiny-emitter": "^2.0.2",
-    "styled-components": "^3.1.4"
+  "scripts": {
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build": "babel src/module -d dist",
+    "prepare": "npm run build"
   }
 }
