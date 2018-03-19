@@ -26,5 +26,9 @@
     "eject": "react-scripts eject",
     "build": "babel src/module -d dist",
     "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:snowballdigital/react-layout.git"
   }
 }
