@@ -1,2 +1,34 @@
 # react-layout
+
 Helpers for setting up main layout with side menues
+
+## Usage
+
+```
+import CrystallizeLayout, { toggleLeft, toggleRight } from '@crystallize/react-layout';
+
+<CrystallizeLayout left={LeftComponent} right={RightComponent}>
+    <button onClick={() => toggleLeft}>Toggle left menu</button>
+    <button onClick={() => toggleRight}>Toggle right menu</button>
+</CrystallizeLayout>
+```
+
+## Passed props
+
+All direct children of CrystallizeLayout gets passed the following props
+
+### leftShown (boolean)
+
+Reflects if the left menu is shown
+
+### rightShown (boolean)
+
+Reflects if the right menu is shown
+
+### contentPushed (string)
+
+Reflects the current offset the content has been pushed. Is usually
+
+* 300px (left menu is shown)
+* 0px (no menu is shown)
+* -300px (right menu is shown)
