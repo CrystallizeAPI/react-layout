@@ -94,12 +94,12 @@ export default class CrystallizeLayout extends Component {
         </Content>
         {LeftCmp && (
           <Left width={leftWidth || width} show={showLeft}>
-            <LeftCmp />
+            <LeftCmp shown={showLeft} />
           </Left>
         )}
         {RightCmp && (
           <Right width={rightWidth || width} show={showRight}>
-            <RightCmp />
+            <RightCmp shown={showRight} />
           </Right>
         )}
       </Outer>
