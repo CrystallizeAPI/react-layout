@@ -4,7 +4,7 @@ function getPosition(props) {
   if (props.show) {
     return '0px';
   }
-  return `-${props.width || '300px'}`;
+  return `-${props.width}`;
 }
 
 function getOuterLeft(props) {
@@ -27,11 +27,10 @@ function getContentOverflowX(props) {
 export const Outer = styled.div.attrs({
   className: 'crystallize-layout'
 })`
-  transition: left 0.3s cubic-bezier(0.41, 0.03, 0, 0.96),
-    right 0.3s cubic-bezier(0.41, 0.03, 0, 0.96);
+  transition: left 0.3s cubic-bezier(0.41, 0.03, 0, 0.96);
   position: relative;
   left: ${getOuterLeft};
-  will-change: left, right;
+  will-change: left;
 `;
 
 export const Content = styled.div.attrs({

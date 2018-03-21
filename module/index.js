@@ -15,11 +15,15 @@ export const toggleLeft = (show = !showStatus.left) => {
   showStatus.left = show;
   emitter.emit('toggle', showStatus);
 };
+export const showLeft = () => toggleLeft(true);
+export const hideLeft = () => toggleLeft(false);
 
 export const toggleRight = (show = !showStatus.right) => {
   showStatus.right = show;
   emitter.emit('toggle', showStatus);
 };
+export const showRight = () => toggleRight(true);
+export const hideRight = () => toggleRight(false);
 
 export default class CrystallizeLayout extends Component {
   state = {
@@ -53,23 +57,25 @@ export default class CrystallizeLayout extends Component {
       return React.cloneElement(child, additionalProps);
     });
   };
-
   render() {
     const {
       left,
       right,
       width = defaultWidth,
-      leftWidth = defaultWidth,
-      rightWidth = defaultWidth
+      leftWidth,
+      rightWidth
     } = this.props;
+
+    const leftWidthToUse = leftWidth || width;
+    const rightWidthToUse = rightWidth || width;
 
     const { showLeft, showRight } = this.state;
 
     let contentPushed = '0px';
     if (showLeft) {
-      contentPushed = leftWidth;
+      contentPushed = leftWidthToUse;
     } else if (showRight) {
-      contentPushed = `-${rightWidth}`;
+      contentPushed = `-${rightWidthToUse}`;
     }
 
     const LeftCmp = left || null;
@@ -79,8 +85,8 @@ export default class CrystallizeLayout extends Component {
       <Outer
         showLeft={showLeft}
         showRight={showRight}
-        leftWidth={leftWidth}
-        rightWidth={rightWidth}
+        leftWidth={leftWidthToUse}
+        rightWidth={rightWidthToUse}
       >
         {(showLeft || showRight) && (
           <ClickOverlay onClick={this.onOverlayClick} />
@@ -93,12 +99,12 @@ export default class CrystallizeLayout extends Component {
           })}
         </Content>
         {LeftCmp && (
-          <Left width={leftWidth || width} show={showLeft}>
+          <Left width={leftWidthToUse} show={showLeft}>
             <LeftCmp shown={showLeft} />
           </Left>
         )}
         {RightCmp && (
-          <Right width={rightWidth || width} show={showRight}>
+          <Right width={rightWidthToUse} show={showRight}>
             <RightCmp shown={showRight} />
           </Right>
         )}
