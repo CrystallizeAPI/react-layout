@@ -39,11 +39,25 @@ export default class CrystallizeLayout extends Component {
     emitter.off('toggle', this.onToggle);
   }
 
+  disableScroll(stop) {
+    if (!this.defaultBodyOverflow) {
+      const style = getComputedStyle(document.body);
+      this.defaultBodyOverflow = style.overflowY;
+    }
+    document.body.style.overflowY = stop ? 'hidden' : this.defaultBodyOverflow;
+  }
+
   onToggle = ({ left, right }) => {
     this.setState({
       showLeft: left,
       showRight: right
     });
+
+    if (left || right) {
+      this.disableScroll(true);
+    } else {
+      this.disableScroll(false);
+    }
   };
 
   onOverlayClick = e => {
@@ -57,6 +71,7 @@ export default class CrystallizeLayout extends Component {
       return React.cloneElement(child, additionalProps);
     });
   };
+
   render() {
     const {
       left,

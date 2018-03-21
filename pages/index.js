@@ -8,7 +8,9 @@ export default () => (
     <style jsx>{`
       div {
         text-align: center;
+        min-height: 150vh;
       }
+
       h1 {
         margin: 0 0 15px;
         padding-top: 10px;
