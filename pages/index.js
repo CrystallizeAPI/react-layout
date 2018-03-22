@@ -5,10 +5,20 @@ const right = () => <div>Right menu</div>;
 
 export default () => (
   <CrystallizeLayout left={left} right={right}>
+    <style jsx global>{`
+      body {
+        margin: 0;
+      }
+
+      .crystallize-layout__menu {
+        background: #f0f0f0;
+      }
+    `}</style>
     <style jsx>{`
       div {
         text-align: center;
         min-height: 150vh;
+        padding-top: 45vh;
       }
 
       h1 {

@@ -12,6 +12,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
+    "babel-plugin-module-resolver": "^3.1.0",
     "babel-plugin-styled-components": "^1.5.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -31,5 +32,31 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:snowballdigital/react-layout.git"
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": [
+            "./"
+          ],
+          "alias": {
+            "module": "./module"
+          }
+        }
+      ],
+      [
+        "styled-components",
+        {
+          "ssr": true,
+          "displayName": true,
+          "preprocess": false
+        }
+      ]
+    ]
   }
 }

@@ -14,6 +14,9 @@ const showStatus = {
 export const toggleLeft = (show = !showStatus.left) => {
   showStatus.left = show;
   emitter.emit('toggle', showStatus);
+  if (show && document.activeElement) {
+    document.activeElement.blur();
+  }
 };
 export const showLeft = () => toggleLeft(true);
 export const hideLeft = () => toggleLeft(false);
@@ -21,6 +24,9 @@ export const hideLeft = () => toggleLeft(false);
 export const toggleRight = (show = !showStatus.right) => {
   showStatus.right = show;
   emitter.emit('toggle', showStatus);
+  if (show && document.activeElement) {
+    document.activeElement.blur();
+  }
 };
 export const showRight = () => toggleRight(true);
 export const hideRight = () => toggleRight(false);
@@ -104,7 +110,11 @@ export default class CrystallizeLayout extends Component {
         rightWidth={rightWidthToUse}
       >
         {(showLeft || showRight) && (
-          <ClickOverlay onClick={this.onOverlayClick} />
+          <ClickOverlay
+            showLeft={showLeft}
+            showRight={showRight}
+            onClick={this.onOverlayClick}
+          />
         )}
         <Content>
           {this.renderChildren({
