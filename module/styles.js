@@ -43,6 +43,16 @@ export const Content = styled.div.attrs({
   z-index: 2;
   overflow-x: ${getContentOverflowX};
   background: ${p => p.background};
+  ${p =>
+    p.blurContentOnShow &&
+    `
+    transition: filter ${transitionSpeed} ${transitionEasing};
+  `} ${p =>
+    p.blurContentOnShow &&
+    (p.leftShown || p.rightShown) &&
+    `
+    filter: blur(5px);
+  `};
 `;
 
 export const Left = styled.div.attrs({

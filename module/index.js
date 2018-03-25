@@ -84,7 +84,8 @@ export default class CrystallizeLayout extends Component {
       right,
       width = defaultWidth,
       leftWidth,
-      rightWidth
+      rightWidth,
+      blurContentOnShow
     } = this.props;
 
     const leftWidthToUse = leftWidth || width;
@@ -116,7 +117,11 @@ export default class CrystallizeLayout extends Component {
             onClick={this.onOverlayClick}
           />
         )}
-        <Content>
+        <Content
+          leftShown={showLeft}
+          rightShown={showRight}
+          blurContentOnShow={blurContentOnShow}
+        >
           {this.renderChildren({
             leftShown: showLeft,
             rightShown: showRight,

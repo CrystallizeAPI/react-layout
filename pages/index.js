@@ -4,7 +4,7 @@ const left = () => <div>Left menu</div>;
 const right = () => <div>Right menu</div>;
 
 export default () => (
-  <CrystallizeLayout left={left} right={right}>
+  <CrystallizeLayout left={left} right={right} blurContentOnShow>
     <style jsx global>{`
       body {
         margin: 0;
