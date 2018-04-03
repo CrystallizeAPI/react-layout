@@ -103,6 +103,12 @@ export default class CrystallizeLayout extends Component {
     const LeftCmp = left || null;
     const RightCmp = right || null;
 
+    // Enable the blur content on show prop setting
+    let blurContentOnShowProp = blurContentOnShow;
+    if (blurContentOnShow && typeof blurContentOnShow === 'boolean') {
+      blurContentOnShowProp = '3px';
+    }
+
     return (
       <Outer
         showLeft={showLeft}
@@ -120,12 +126,12 @@ export default class CrystallizeLayout extends Component {
         <Content
           leftShown={showLeft}
           rightShown={showRight}
-          blurContentOnShow={blurContentOnShow}
+          blurContentOnShow={blurContentOnShowProp}
         >
           {this.renderChildren({
-            leftShown: showLeft,
-            rightShown: showRight,
-            contentPushed
+            leftshown: showLeft.toString(),
+            rightshown: showRight.toString(),
+            contentpushed: contentPushed
           })}
         </Content>
         {LeftCmp && (

@@ -1,7 +1,7 @@
 import CrystallizeLayout, { showRight, showLeft } from '../module';
 
-const left = () => <div>Left menu</div>;
-const right = () => <div>Right menu</div>;
+const left = () => <aside>Left menu</aside>;
+const right = () => <aside>Right menu</aside>;
 
 export default () => (
   <CrystallizeLayout left={left} right={right} blurContentOnShow>
@@ -13,9 +13,13 @@ export default () => (
       .crystallize-layout__menu {
         background: #f0f0f0;
       }
+
+      aside {
+        padding: 20px;
+      }
     `}</style>
     <style jsx>{`
-      div {
+      main {
         text-align: center;
         min-height: 150vh;
         padding-top: 45vh;
@@ -30,10 +34,10 @@ export default () => (
         margin: 0 10px;
       }
     `}</style>
-    <div>
+    <main>
       <h1>React layout</h1>
       <button onClick={showLeft}>Show left</button>
       <button onClick={showRight}>Show right</button>
-    </div>
+    </main>
   </CrystallizeLayout>
 );

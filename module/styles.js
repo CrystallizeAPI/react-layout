@@ -51,7 +51,7 @@ export const Content = styled.div.attrs({
     p.blurContentOnShow &&
     (p.leftShown || p.rightShown) &&
     `
-    filter: blur(5px);
+    filter: blur(${p.blurContentOnShow});
   `};
 `;
 
