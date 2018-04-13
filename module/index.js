@@ -55,8 +55,8 @@ export default class CrystallizeLayout extends Component {
 
   onToggle = ({ left, right }) => {
     this.setState({
-      showLeft: left ? true : false,
-      showRight: right ? true : false
+      showLeft: left,
+      showRight: right
     });
 
     if (left || right) {
