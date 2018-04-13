@@ -129,9 +129,9 @@ export default class CrystallizeLayout extends Component {
           blurContentOnShow={blurContentOnShowProp}
         >
           {this.renderChildren({
-            leftshown: showLeft.toString(),
-            rightshown: showRight.toString(),
-            contentpushed: contentPushed
+            leftShown: showLeft,
+            rightShown: showRight,
+            contentPushed
           })}
         </Content>
         {LeftCmp && (
