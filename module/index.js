@@ -10,24 +10,54 @@ const showStatus = {
   left: false,
   right: false
 };
+let speed = 300;
+const toggleResolvers = [];
 
-export const toggleLeft = (show = !showStatus.left) => {
-  showStatus.left = show;
-  emitter.emit('toggle', showStatus);
-  if (show && document.activeElement) {
-    document.activeElement.blur();
+function toggleSide(side, show) {
+  if (toggleResolvers.length > 0) {
+    toggleResolvers.forEach(r => {
+      if (!r.handeled) {
+        r.reject(`@crystallize/react-layout. Cancelled: ${r.type}`);
+        r.handeled = true;
+      }
+    });
   }
-};
+
+  return new Promise((resolve, reject) => {
+    if (side === 'both') {
+      showStatus.left = false;
+      showStatus.right = false;
+    } else {
+      showStatus[side] = show;
+    }
+
+    emitter.emit('toggle', showStatus);
+
+    if (show && document.activeElement) {
+      document.activeElement.blur();
+    }
+
+    const resolver = {
+      type: `${show ? 'Show' : 'Hide'} ${side} side(s)`,
+      timeout: setTimeout(() => {
+        if (!resolver.handeled) {
+          resolver.resolve();
+        }
+        toggleResolvers.splice(toggleResolvers.indexOf(r => r === resolver), 1);
+      }, speed),
+      resolve,
+      reject
+    };
+
+    toggleResolvers.push(resolver);
+  });
+}
+
+export const toggleLeft = (show = !showStatus.left) => toggleSide('left', show);
 export const showLeft = () => toggleLeft(true);
 export const hideLeft = () => toggleLeft(false);
-
-export const toggleRight = (show = !showStatus.right) => {
-  showStatus.right = show;
-  emitter.emit('toggle', showStatus);
-  if (show && document.activeElement) {
-    document.activeElement.blur();
-  }
-};
+export const toggleRight = (show = !showStatus.right) =>
+  toggleSide('right', show);
 export const showRight = () => toggleRight(true);
 export const hideRight = () => toggleRight(false);
 
@@ -39,6 +69,7 @@ export default class CrystallizeLayout extends Component {
 
   componentDidMount() {
     emitter.on('toggle', this.onToggle);
+    speed = parseInt(this.props.speed || 300);
   }
 
   componentWillUnmount() {
@@ -68,8 +99,7 @@ export default class CrystallizeLayout extends Component {
 
   onOverlayClick = e => {
     e.preventDefault();
-    toggleLeft(false);
-    toggleRight(false);
+    toggleSide('both');
   };
 
   renderChildren = additionalProps => {
@@ -115,18 +145,21 @@ export default class CrystallizeLayout extends Component {
         showRight={showRight}
         leftWidth={leftWidthToUse}
         rightWidth={rightWidthToUse}
+        speed={speed}
       >
         {(showLeft || showRight) && (
           <ClickOverlay
             showLeft={showLeft}
             showRight={showRight}
             onClick={this.onOverlayClick}
+            speed={speed}
           />
         )}
         <Content
           leftShown={showLeft}
           rightShown={showRight}
           blurContentOnShow={blurContentOnShowProp}
+          speed={speed}
         >
           {this.renderChildren({
             leftShown: showLeft,
@@ -135,12 +168,12 @@ export default class CrystallizeLayout extends Component {
           })}
         </Content>
         {LeftCmp && (
-          <Left width={leftWidthToUse} show={showLeft}>
+          <Left width={leftWidthToUse} show={showLeft} speed={speed}>
             <LeftCmp shown={showLeft} />
           </Left>
         )}
         {RightCmp && (
-          <Right width={rightWidthToUse} show={showRight}>
+          <Right width={rightWidthToUse} show={showRight} speed={speed}>
             <RightCmp shown={showRight} />
           </Right>
         )}

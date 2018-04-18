@@ -6,6 +6,16 @@ const left = () => <aside>Left menu</aside>;
 const right = () => <aside>Right menu</aside>;
 
 class Test extends React.Component {
+  showLeft = async () => {
+    console.log('Showing left');
+    try {
+      await showLeft();
+      console.log('Shown!');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   render() {
     return (
       <div>
@@ -40,7 +50,7 @@ class Test extends React.Component {
         `}</style>
         <main>
           <h1>React layout</h1>
-          <button onClick={showLeft}>Show left</button>
+          <button onClick={this.showLeft}>Show left</button>
           <button onClick={showRight}>Show right</button>
         </main>
       </div>
@@ -49,7 +59,7 @@ class Test extends React.Component {
 }
 
 export default () => (
-  <CrystallizeLayout left={left} right={right} blurContentOnShow>
+  <CrystallizeLayout left={left} right={right} speed="500">
     <Test />
   </CrystallizeLayout>
 );

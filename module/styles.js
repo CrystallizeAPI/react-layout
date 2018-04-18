@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-const transitionSpeed = '0.3s';
 const transitionEasing = 'cubic-bezier(0.41, 0.03, 0, 0.96)';
 
 function getPosition(props) {
@@ -30,7 +29,7 @@ function getContentOverflowX(props) {
 export const Outer = styled.div.attrs({
   className: 'crystallize-layout'
 })`
-  transition: left ${transitionSpeed} ${transitionEasing};
+  transition: left ${p => p.speed}ms ${transitionEasing};
   will-change: left;
   position: relative;
   left: ${getOuterLeft};
@@ -46,7 +45,7 @@ export const Content = styled.div.attrs({
   ${p =>
     p.blurContentOnShow &&
     `
-    transition: filter ${transitionSpeed} ${transitionEasing};
+    transition: filter ${p => p.speed}ms ${transitionEasing};
   `} ${p =>
     p.blurContentOnShow &&
     (p.leftShown || p.rightShown) &&
@@ -66,7 +65,7 @@ export const Left = styled.div.attrs({
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  transition: left ${transitionSpeed} ${transitionEasing};
+  transition: left ${p => p.speed}ms ${transitionEasing};
   will-change: left;
   width: ${p => p.width || '300px'};
 `;
@@ -82,7 +81,7 @@ export const Right = styled.div.attrs({
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  transition: right ${transitionSpeed} ${transitionEasing};
+  transition: right ${p => p.speed}ms ${transitionEasing};
   width: ${p => p.width || '300px'};
   will-change: right;
 `;
@@ -96,6 +95,6 @@ export const ClickOverlay = styled.div.attrs({
   height: 100vh;
   width: 100vw;
   z-index: 3;
-  transition: left ${transitionSpeed} ${transitionEasing};
+  transition: left ${p => p.speed}ms ${transitionEasing};
   will-change: left;
 `;
