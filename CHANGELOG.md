@@ -1,3 +1,11 @@
+<a name="1.5.1"></a>
+## <small>1.5.1 (2018-04-25)</small>
+
+* Don't throw error when cancelling show ([8c2289b](https://github.com/snowballdigital/react-layout/commit/8c2289b))
+* Generated changelog ([d40f673](https://github.com/snowballdigital/react-layout/commit/d40f673))
+
+
+
 <a name="1.5.0"></a>
 ## 1.5.0 (2018-04-18)
 
