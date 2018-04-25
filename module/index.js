@@ -17,13 +17,13 @@ function toggleSide(side, show) {
   if (toggleResolvers.length > 0) {
     toggleResolvers.forEach(r => {
       if (!r.handeled) {
-        r.reject(`@crystallize/react-layout. Cancelled: ${r.type}`);
+        r.resolve(false);
         r.handeled = true;
       }
     });
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     if (side === 'both') {
       showStatus.left = false;
       showStatus.right = false;
@@ -41,12 +41,11 @@ function toggleSide(side, show) {
       type: `${show ? 'Show' : 'Hide'} ${side} side(s)`,
       timeout: setTimeout(() => {
         if (!resolver.handeled) {
-          resolver.resolve();
+          resolver.resolve(true);
         }
         toggleResolvers.splice(toggleResolvers.indexOf(r => r === resolver), 1);
       }, speed),
-      resolve,
-      reject
+      resolve
     };
 
     toggleResolvers.push(resolver);

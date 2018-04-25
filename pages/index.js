@@ -8,12 +8,8 @@ const right = () => <aside>Right menu</aside>;
 class Test extends React.Component {
   showLeft = async () => {
     console.log('Showing left');
-    try {
-      await showLeft();
-      console.log('Shown!');
-    } catch (e) {
-      console.log(e);
-    }
+    const shown = await showLeft();
+    console.log('Shown?', shown);
   };
 
   render() {
