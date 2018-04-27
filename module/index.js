@@ -3,7 +3,7 @@ import Emitter from 'tiny-emitter';
 
 import { Outer, Left, Right, Content, ClickOverlay } from './styles';
 
-const defaultWidth = '500px';
+const defaultWidth = '300px';
 const marginToTriggerWidthOverride = 40;
 
 export const emitter = new Emitter();
