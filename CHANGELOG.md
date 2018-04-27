@@ -1,3 +1,11 @@
+<a name="1.5.2"></a>
+## <small>1.5.2 (2018-04-27)</small>
+
+* MIT license ([b87e1e8](https://github.com/snowballdigital/react-layout/commit/b87e1e8))
+* Respects the width of the device ([86deac1](https://github.com/snowballdigital/react-layout/commit/86deac1))
+
+
+
 <a name="1.5.1"></a>
 ## <small>1.5.1 (2018-04-25)</small>
 
