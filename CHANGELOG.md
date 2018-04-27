@@ -1,3 +1,10 @@
+<a name="1.5.3"></a>
+## <small>1.5.3 (2018-04-27)</small>
+
+* Default menu width = 300px ([bfb5abc](https://github.com/snowballdigital/react-layout/commit/bfb5abc))
+
+
+
 <a name="1.5.2"></a>
 ## <small>1.5.2 (2018-04-27)</small>
 
