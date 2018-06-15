@@ -238,6 +238,8 @@ export default class CrystallizeLayout extends Component {
           <ClickOverlay
             showLeft={showLeft}
             showRight={showRight}
+            leftWidth={leftWidthToUse}
+            rightWidth={rightWidthToUse}
             onClick={this.onOverlayClick}
             speed={speed}
           />
