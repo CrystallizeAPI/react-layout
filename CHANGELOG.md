@@ -1,3 +1,10 @@
+<a name="1.5.4"></a>
+## <small>1.5.4 (2018-06-15)</small>
+
+* Bugfix for click overlay ([34c52dc](https://github.com/snowballdigital/react-layout/commit/34c52dc))
+
+
+
 <a name="1.5.3"></a>
 ## <small>1.5.3 (2018-04-27)</small>
 
