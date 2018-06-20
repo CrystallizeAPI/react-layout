@@ -7,9 +7,12 @@ Helpers for setting up main layout with side menues
 ```
 import CrystallizeLayout, { toggleLeft, toggleRight } from '@crystallize/react-layout';
 
-<CrystallizeLayout left={LeftComponent} right={RightComponent}>
-    <button onClick={() => toggleLeft}>Toggle left menu</button>
-    <button onClick={() => toggleRight}>Toggle right menu</button>
+<CrystallizeLayout left={LeftComponent} right={RightComponent}>{({ leftShown, rightShown, contentPushed}) => (
+    <div>
+        <button onClick={() => toggleLeft}>Toggle left menu</button>
+        <button onClick={() => toggleRight}>Toggle right menu</button>
+    </div>
+)}
 </CrystallizeLayout>
 ```
 
@@ -29,6 +32,6 @@ Reflects if the right menu is shown
 
 Reflects the current offset the content has been pushed. Is usually
 
-* 300px (left menu is shown)
-* 0px (no menu is shown)
-* -300px (right menu is shown)
+- 300px (left menu is shown)
+- 0px (no menu is shown)
+- -300px (right menu is shown)
