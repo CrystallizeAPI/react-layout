@@ -1,3 +1,10 @@
+<a name="1.6.1"></a>
+## <small>1.6.1 (2018-06-25)</small>
+
+* More sane width for remaining content width when a menu is shown ([57068d3](https://github.com/snowballdigital/react-layout/commit/57068d3))
+
+
+
 ## 1.6.0 (2018-06-20)
 
 * Support render fn ([76e6525](https://github.com/snowballdigital/react-layout/commit/76e6525))
