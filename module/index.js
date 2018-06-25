@@ -4,7 +4,9 @@ import Emitter from 'tiny-emitter';
 import { Outer, Left, Right, Content, ClickOverlay } from './styles';
 
 const defaultWidth = '300px';
-const marginToTriggerWidthOverride = 40;
+
+// The minimal width in px for the pushed out content
+const minimalWidthForPushedOutContent = 65;
 
 export const emitter = new Emitter();
 const showStatus = {
@@ -100,7 +102,8 @@ export default class CrystallizeLayout extends Component {
     clearTimeout(this.widthOverrideSetTimeout);
     this.widthOverrideSetTimeout = setTimeout(() => {
       this.setState({
-        widthOverride: window.innerWidth - marginToTriggerWidthOverride + 'px'
+        widthOverride:
+          window.innerWidth - minimalWidthForPushedOutContent + 'px'
       });
     }, 25);
   };
@@ -121,13 +124,13 @@ export default class CrystallizeLayout extends Component {
     const right = rightWidth || width;
 
     this.leftMql = window.matchMedia(
-      `(min-width: ${parseInt(left, 10) + marginToTriggerWidthOverride}px)`
+      `(min-width: ${parseInt(left, 10) + minimalWidthForPushedOutContent}px)`
     );
     this.leftMql.addListener(this.handleLeftMediaChange);
     this.handleLeftMediaChange(this.leftMql);
 
     this.rightMql = window.matchMedia(
-      `(min-width: ${parseInt(right, 10) + marginToTriggerWidthOverride}px)`
+      `(min-width: ${parseInt(right, 10) + minimalWidthForPushedOutContent}px)`
     );
     this.rightMql.addListener(this.handleRightMediaChange);
     this.handleRightMediaChange(this.rightMql);
