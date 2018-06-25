@@ -56,6 +56,6 @@ class Test extends React.Component {
 
 export default () => (
   <CrystallizeLayout left={left} right={right} speed="500">
-    <Test />
+    {props => <Test {...props} />}
   </CrystallizeLayout>
 );

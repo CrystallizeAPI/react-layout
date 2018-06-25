@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Emitter from 'tiny-emitter';
+import isCallable from 'is-callable';
 
 import { Outer, Left, Right, Content, ClickOverlay } from './styles';
 
@@ -188,7 +189,14 @@ export default class CrystallizeLayout extends Component {
   };
 
   renderChildren = additionalProps => {
-    return React.Children.map(this.props.children, child => {
+    const { children } = this.props;
+
+    // Render function
+    if (isCallable(children)) {
+      return children(additionalProps);
+    }
+
+    return React.Children.map(children, child => {
       return React.cloneElement(child, additionalProps);
     });
   };

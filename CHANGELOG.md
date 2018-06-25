@@ -1,3 +1,9 @@
+## 1.6.0 (2018-06-20)
+
+* Support render fn ([76e6525](https://github.com/snowballdigital/react-layout/commit/76e6525))
+
+
+
 <a name="1.5.4"></a>
 ## <small>1.5.4 (2018-06-15)</small>
 
