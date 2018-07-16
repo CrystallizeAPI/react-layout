@@ -1,3 +1,10 @@
+<a name="1.7.1"></a>
+## <small>1.7.1 (2018-07-16)</small>
+
+* Bugfix: move the tap highlight rule where it should be ([c7f572a](https://github.com/snowballdigital/react-layout/commit/c7f572a))
+
+
+
 <a name="1.7.0"></a>
 ## 1.7.0 (2018-07-16)
 
