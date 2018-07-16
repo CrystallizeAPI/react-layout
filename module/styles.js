@@ -33,7 +33,6 @@ export const Outer = styled.div.attrs({
   will-change: left;
   position: relative;
   left: ${getOuterLeft};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
 
 export const Content = styled.div.attrs({
@@ -98,4 +97,5 @@ export const ClickOverlay = styled.div.attrs({
   z-index: 3;
   transition: left ${p => p.speed}ms ${transitionEasing};
   will-change: left;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
