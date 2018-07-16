@@ -1,3 +1,10 @@
+<a name="1.7.0"></a>
+## 1.7.0 (2018-07-16)
+
+* Remove tap highlight color for content on iOS ([c5971e9](https://github.com/snowballdigital/react-layout/commit/c5971e9))
+
+
+
 <a name="1.6.1"></a>
 ## <small>1.6.1 (2018-06-25)</small>
 
