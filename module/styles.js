@@ -33,6 +33,7 @@ export const Outer = styled.div.attrs({
   will-change: left;
   position: relative;
   left: ${getOuterLeft};
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
 
 export const Content = styled.div.attrs({
