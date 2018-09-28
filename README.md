@@ -1,3 +1,5 @@
+![alt text](https://raw.githubusercontent.com/snowballdigital/react-layout/HEAD/media/logo.png 'Boxes')
+
 # react-layout
 
 Helpers for setting up main layout with side menues
