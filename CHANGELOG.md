@@ -1,3 +1,10 @@
+## 1.8.0 (2018-09-28)
+
+* Added logo ([b454749](https://github.com/snowballdigital/react-layout/commit/b454749))
+* Use Yarn ([d568e22](https://github.com/snowballdigital/react-layout/commit/d568e22))
+
+
+
 <a name="1.7.1"></a>
 ## <small>1.7.1 (2018-07-16)</small>
 
