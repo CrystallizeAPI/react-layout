@@ -11,8 +11,8 @@ import CrystallizeLayout, { toggleLeft, toggleRight } from '@crystallize/react-l
 
 <CrystallizeLayout left={LeftComponent} right={RightComponent}>{({ leftShown, rightShown, contentPushed}) => (
     <div>
-        <button onClick={() => toggleLeft}>Toggle left menu</button>
-        <button onClick={() => toggleRight}>Toggle right menu</button>
+        <button onClick={toggleLeft}>Toggle left menu</button>
+        <button onClick={toggleRight}>Toggle right menu</button>
     </div>
 )}
 </CrystallizeLayout>
