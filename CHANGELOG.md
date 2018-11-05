@@ -1,3 +1,9 @@
+## 1.10.0 (2018-11-05)
+
+* Updated readme ([98e3efa](https://github.com/CrystallizeAPI/react-layout/commit/98e3efa))
+
+
+
 ## 1.9.0 (2018-11-01)
 
 * New git url ([91f5bee](https://github.com/CrystallizeAPI/react-layout/commit/91f5bee))
