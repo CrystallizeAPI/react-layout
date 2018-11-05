@@ -18,6 +18,16 @@ import CrystallizeLayout, { toggleLeft, toggleRight } from '@crystallize/react-l
 </CrystallizeLayout>
 ```
 
+## Exports
+
+- (default) CrystallizeLayout
+- showLeft
+- hideLeft
+- toggleLeft
+- showRight
+- hideLeft
+- toggleRight
+
 ## Passed props
 
 All direct children of CrystallizeLayout gets passed the following props
