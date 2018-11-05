@@ -1,3 +1,9 @@
+## <small>1.10.1 (2018-11-05)</small>
+
+* Bugfix for code example in readme ([4fda1fc](https://github.com/CrystallizeAPI/react-layout/commit/4fda1fc))
+
+
+
 ## 1.10.0 (2018-11-05)
 
 * Updated readme ([98e3efa](https://github.com/CrystallizeAPI/react-layout/commit/98e3efa))
