@@ -1,3 +1,9 @@
+## 2.0.0 (2018-11-07)
+
+* Added transitionProp option ([f5cbe3f](https://github.com/CrystallizeAPI/react-layout/commit/f5cbe3f))
+
+
+
 ## <small>1.10.1 (2018-11-05)</small>
 
 * Bugfix for code example in readme ([4fda1fc](https://github.com/CrystallizeAPI/react-layout/commit/4fda1fc))
