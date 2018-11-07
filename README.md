@@ -28,6 +28,15 @@ import CrystallizeLayout, { toggleLeft, toggleRight } from '@crystallize/react-l
 - hideLeft
 - toggleRight
 
+## Component props
+
+- left
+- right
+- leftWidth
+- rightWidth
+- width (for both left and right)
+- transitionProp ('left/right' or 'transform')
+
 ## Passed props
 
 All direct children of CrystallizeLayout gets passed the following props

@@ -208,7 +208,8 @@ export default class CrystallizeLayout extends Component {
       width = defaultWidth,
       leftWidth,
       rightWidth,
-      blurContentOnShow
+      blurContentOnShow,
+      transitionProp = 'left'
     } = this.props;
     const { widthOverride } = this.state;
 
@@ -244,6 +245,7 @@ export default class CrystallizeLayout extends Component {
         leftWidth={leftWidthToUse}
         rightWidth={rightWidthToUse}
         speed={speed}
+        transitionProp={transitionProp}
       >
         {(showLeft || showRight) && (
           <ClickOverlay
@@ -252,7 +254,7 @@ export default class CrystallizeLayout extends Component {
             leftWidth={leftWidthToUse}
             rightWidth={rightWidthToUse}
             onClick={this.onOverlayClick}
-            speed={speed}
+            transitionProp={transitionProp}
           />
         )}
         <Content
@@ -260,6 +262,7 @@ export default class CrystallizeLayout extends Component {
           rightShown={showRight}
           blurContentOnShow={blurContentOnShowProp}
           speed={speed}
+          transitionProp={transitionProp}
         >
           {this.renderChildren({
             leftShown: showLeft,
@@ -268,12 +271,22 @@ export default class CrystallizeLayout extends Component {
           })}
         </Content>
         {LeftCmp && (
-          <Left width={leftWidthToUse} show={showLeft} speed={speed}>
+          <Left
+            width={leftWidthToUse}
+            show={showLeft}
+            speed={speed}
+            transitionProp={transitionProp}
+          >
             <LeftCmp shown={showLeft} />
           </Left>
         )}
         {RightCmp && (
-          <Right width={rightWidthToUse} show={showRight} speed={speed}>
+          <Right
+            width={rightWidthToUse}
+            show={showRight}
+            speed={speed}
+            transitionProp={transitionProp}
+          >
             <RightCmp shown={showRight} />
           </Right>
         )}
