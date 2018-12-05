@@ -1,3 +1,10 @@
+## 2.1.0 (2018-12-05)
+
+* Install instructions in readme ([00346bf](https://github.com/CrystallizeAPI/react-layout/commit/00346bf))
+* Update README.md ([961a60e](https://github.com/CrystallizeAPI/react-layout/commit/961a60e))
+
+
+
 ## 2.0.0 (2018-11-07)
 
 * Added transitionProp option ([f5cbe3f](https://github.com/CrystallizeAPI/react-layout/commit/f5cbe3f))
