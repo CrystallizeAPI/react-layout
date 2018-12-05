@@ -4,6 +4,12 @@
 
 Helpers for setting up main layout with side menues. React components for building Crystallize powered [React commerce](https://crystallize.com/developers) with SSR using Next.js.
 
+## Install
+
+```
+yarn add @crystallize/react-layout
+```
+
 ## Usage
 
 ```
