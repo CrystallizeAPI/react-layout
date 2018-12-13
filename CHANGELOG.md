@@ -1,3 +1,9 @@
+## <small>2.1.1 (2018-12-13)</small>
+
+* Fix IOS viewport height issue ([6bc8743](https://github.com/CrystallizeAPI/react-layout/commit/6bc8743))
+
+
+
 ## 2.1.0 (2018-12-05)
 
 * Install instructions in readme ([00346bf](https://github.com/CrystallizeAPI/react-layout/commit/00346bf))
