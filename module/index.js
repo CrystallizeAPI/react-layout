@@ -83,19 +83,18 @@ export default class CrystallizeLayout extends Component {
     emitter.on('toggle', this.onToggle);
     speed = parseInt(this.props.speed || 300);
     this.listenForMediaChange();
+    this.handleWindowResize();
+    window.addEventListener('resize', this.handleWindowResize, false);
   }
 
   componentWillUnmount() {
     emitter.off('toggle', this.onToggle);
     this.stopListenForMediaChange();
+
+    window.removeEventListener('resize', this.handleWindowResize);
   }
 
   startWidthOverride = side => {
-    if (!this.activeWidthOverrides.any) {
-      this.handleWindowResize();
-      window.addEventListener('resize', this.handleWindowResize, false);
-    }
-
     this.activeWidthOverrides[side] = true;
   };
 
@@ -107,13 +106,16 @@ export default class CrystallizeLayout extends Component {
           window.innerWidth - minimalWidthForPushedOutContent + 'px'
       });
     }, 25);
+
+    // Set the current visible viewport to a custom variable
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
 
   stopWidthOverride = side => {
     this.activeWidthOverrides[side] = false;
 
     if (!this.activeWidthOverrides.any) {
-      window.removeEventListener('resize', this.handleWindowResize);
       clearTimeout(this.widthOverrideSetTimeout);
     }
   };
@@ -165,9 +167,9 @@ export default class CrystallizeLayout extends Component {
   disableScroll(stop) {
     if (!this.defaultBodyOverflow) {
       const style = getComputedStyle(document.body);
-      this.defaultBodyOverflow = style.overflowY;
+      this.defaultBodyOverflow = style.overflow;
     }
-    document.body.style.overflowY = stop ? 'hidden' : this.defaultBodyOverflow;
+    document.body.style.overflow = stop ? 'hidden' : this.defaultBodyOverflow;
   }
 
   onToggle = ({ left, right }) => {
