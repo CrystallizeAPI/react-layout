@@ -13,12 +13,28 @@ yarn add @crystallize/react-layout
 ## Usage
 
 ```
-import CrystallizeLayout, { toggleLeft, toggleRight } from '@crystallize/react-layout';
+import CrystallizeLayout, { toggleLeft, toggleRight, LayoutContext } from '@crystallize/react-layout';
 
 <CrystallizeLayout left={LeftComponent} right={RightComponent}>{({ leftShown, rightShown, contentPushed}) => (
     <div>
         <button onClick={toggleLeft}>Toggle left menu</button>
         <button onClick={toggleRight}>Toggle right menu</button>
+
+        or...
+
+        <LayoutContext.Consumer>
+            {({ state, actions }) => (
+                <div>
+                    <div>Left shown? {state.leftShown ? 'yes' : 'no'}</div>
+                    <div>
+                        Right shown? {state.rightShown ? 'yes' : 'no'}
+                    </div>
+                    <div>Content pushed: {state.contentPushed}</div>
+                    <button onClick={actions.toggleLeft}>Toggle left menu</button>
+                    <button onClick={actions.toggleRight}>Toggle right menu</button>
+                </div>
+            )}
+        </LayoutContext.Consumer>
     </div>
 )}
 </CrystallizeLayout>

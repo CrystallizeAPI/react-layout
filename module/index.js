@@ -9,6 +9,8 @@ const defaultWidth = '300px';
 // The minimal width in px for the pushed out content
 const minimalWidthForPushedOutContent = 65;
 
+export const LayoutContext = React.createContext();
+
 export const emitter = new Emitter();
 const showStatus = {
   left: false,
@@ -78,6 +80,8 @@ export default class CrystallizeLayout extends Component {
       return this.left || this.right;
     }
   };
+
+  animating = false;
 
   componentDidMount() {
     emitter.on('toggle', this.onToggle);
@@ -173,16 +177,34 @@ export default class CrystallizeLayout extends Component {
   }
 
   onToggle = ({ left, right }) => {
-    this.setState({
-      showLeft: left,
-      showRight: right
-    });
-
-    if (left || right) {
-      this.disableScroll(true);
-    } else {
-      this.disableScroll(false);
+    if (this.animating) {
+      return;
     }
+    this.animating = true;
+
+    const disableScroll = left || right;
+
+    // Ensure we disable scroll before the animation kicks in
+    if (disableScroll) {
+      this.disableScroll(true);
+    }
+
+    this.setState(
+      {
+        showLeft: left,
+        showRight: right
+      },
+      () => {
+        setTimeout(() => {
+          this.animating = false;
+
+          // Disable the scroll after the animation is done
+          if (!disableScroll) {
+            this.disableScroll(false);
+          }
+        }, speed);
+      }
+    );
   };
 
   onOverlayClick = e => {
@@ -201,6 +223,11 @@ export default class CrystallizeLayout extends Component {
     return React.Children.map(children, child => {
       return React.cloneElement(child, additionalProps);
     });
+  };
+
+  contextActions = {
+    toggleLeft: () => this.onToggle({ left: true }),
+    toggleRight: () => this.onToggle({ right: true })
   };
 
   render() {
@@ -240,59 +267,68 @@ export default class CrystallizeLayout extends Component {
       blurContentOnShowProp = '3px';
     }
 
+    const exposedState = {
+      leftShown: showLeft,
+      rightShown: showRight,
+      contentPushed
+    };
+
     return (
-      <Outer
-        showLeft={showLeft}
-        showRight={showRight}
-        leftWidth={leftWidthToUse}
-        rightWidth={rightWidthToUse}
-        speed={speed}
-        transitionProp={transitionProp}
+      <LayoutContext.Provider
+        value={{
+          state: exposedState,
+          actions: this.contextActions
+        }}
       >
-        {(showLeft || showRight) && (
-          <ClickOverlay
-            showLeft={showLeft}
-            showRight={showRight}
-            leftWidth={leftWidthToUse}
-            rightWidth={rightWidthToUse}
-            onClick={this.onOverlayClick}
-            transitionProp={transitionProp}
-          />
-        )}
-        <Content
-          leftShown={showLeft}
-          rightShown={showRight}
-          blurContentOnShow={blurContentOnShowProp}
+        <Outer
+          showLeft={showLeft}
+          showRight={showRight}
+          leftWidth={leftWidthToUse}
+          rightWidth={rightWidthToUse}
           speed={speed}
           transitionProp={transitionProp}
         >
-          {this.renderChildren({
-            leftShown: showLeft,
-            rightShown: showRight,
-            contentPushed
-          })}
-        </Content>
-        {LeftCmp && (
-          <Left
-            width={leftWidthToUse}
-            show={showLeft}
+          {(showLeft || showRight) && (
+            <ClickOverlay
+              showLeft={showLeft}
+              showRight={showRight}
+              leftWidth={leftWidthToUse}
+              rightWidth={rightWidthToUse}
+              onClick={this.onOverlayClick}
+              transitionProp={transitionProp}
+            />
+          )}
+          <Content
+            leftShown={showLeft}
+            rightShown={showRight}
+            blurContentOnShow={blurContentOnShowProp}
             speed={speed}
             transitionProp={transitionProp}
           >
-            <LeftCmp shown={showLeft} />
-          </Left>
-        )}
-        {RightCmp && (
-          <Right
-            width={rightWidthToUse}
-            show={showRight}
-            speed={speed}
-            transitionProp={transitionProp}
-          >
-            <RightCmp shown={showRight} />
-          </Right>
-        )}
-      </Outer>
+            {this.renderChildren(exposedState)}
+          </Content>
+          {LeftCmp && (
+            <Left
+              width={leftWidthToUse}
+              show={showLeft}
+              speed={speed}
+              transitionProp={transitionProp}
+            >
+              <LeftCmp shown={showLeft} />
+            </Left>
+          )}
+          {RightCmp && (
+            <Right
+              width={rightWidthToUse}
+              show={showRight}
+              speed={speed}
+              transitionProp={transitionProp}
+            >
+              <RightCmp shown={showRight} />
+            </Right>
+          )}
+        </Outer>
+      </LayoutContext.Provider>
     );
   }
 }

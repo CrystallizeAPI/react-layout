@@ -1,7 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
 
-import CrystallizeLayout, { showRight, showLeft } from '../module';
+import CrystallizeLayout, {
+  showRight,
+  showLeft,
+  LayoutContext
+} from '../module';
 
 const left = () => (
   <aside>
@@ -125,8 +129,26 @@ export default class Test extends React.Component {
                     />
                   </label>
                 </div>
-                <button onClick={this.showLeft}>Show left</button>
-                <button onClick={showRight}>Show right</button>
+                <br />
+                <div>
+                  <button onClick={this.showLeft}>Show left</button>
+                  <button onClick={showRight}>Show right</button>
+                </div>
+                <br />
+                <hr />
+                <div>
+                  <LayoutContext.Consumer>
+                    {({ state, actions }) => (
+                      <div>
+                        <div>Left shown? {state.leftShown ? 'yes' : 'no'}</div>
+                        <div>
+                          Right shown? {state.rightShown ? 'yes' : 'no'}
+                        </div>
+                        <div>Content pushed: {state.contentPushed}</div>
+                      </div>
+                    )}
+                  </LayoutContext.Consumer>
+                </div>
               </div>
             </main>
           </div>
