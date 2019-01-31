@@ -1,3 +1,9 @@
+## 2.2.0 (2019-01-31)
+
+* Added LayoutContext ([3c9d0e1](https://github.com/CrystallizeAPI/react-layout/commit/3c9d0e1))
+
+
+
 ## <small>2.1.1 (2018-12-13)</small>
 
 * Fix IOS viewport height issue ([6bc8743](https://github.com/CrystallizeAPI/react-layout/commit/6bc8743))
