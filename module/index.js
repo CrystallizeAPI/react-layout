@@ -178,33 +178,38 @@ export default class CrystallizeLayout extends Component {
 
   onToggle = ({ left, right }) => {
     if (this.animating) {
-      return;
-    }
-    this.animating = true;
-
-    const disableScroll = left || right;
-
-    // Ensure we disable scroll before the animation kicks in
-    if (disableScroll) {
-      this.disableScroll(true);
+      return Promise.resolve();
     }
 
-    this.setState(
-      {
-        showLeft: left,
-        showRight: right
-      },
-      () => {
-        setTimeout(() => {
-          this.animating = false;
+    return new Promise(resolve => {
+      this.animating = true;
 
-          // Disable the scroll after the animation is done
-          if (!disableScroll) {
-            this.disableScroll(false);
-          }
-        }, speed);
+      const disableScroll = left || right;
+
+      // Ensure we disable scroll before the animation kicks in
+      if (disableScroll) {
+        this.disableScroll(true);
       }
-    );
+
+      this.setState(
+        {
+          showLeft: left,
+          showRight: right
+        },
+        () => {
+          setTimeout(() => {
+            this.animating = false;
+
+            // Disable the scroll after the animation is done
+            if (!disableScroll) {
+              this.disableScroll(false);
+            }
+
+            resolve();
+          }, speed);
+        }
+      );
+    });
   };
 
   onOverlayClick = e => {
