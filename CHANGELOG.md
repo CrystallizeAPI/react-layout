@@ -1,3 +1,10 @@
+## 3.0.0 (2019-02-02)
+
+* Cleanup ([6d8ee1c](https://github.com/CrystallizeAPI/react-layout/commit/6d8ee1c))
+* Removed unneeded stuff. New, clean, children strategy ([ece9535](https://github.com/CrystallizeAPI/react-layout/commit/ece9535))
+
+
+
 ## <small>2.2.1 (2019-02-02)</small>
 
 * onToggle returns promise ([8ed3391](https://github.com/CrystallizeAPI/react-layout/commit/8ed3391))
