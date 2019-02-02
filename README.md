@@ -15,33 +15,41 @@ yarn add @crystallize/react-layout
 ```
 import CrystallizeLayout, { LayoutContext } from '@crystallize/react-layout';
 
-<CrystallizeLayout left={LeftComponent} right={RightComponent}>{({ leftShown, rightShown, contentPushed}) => (
-    <LayoutContext.Consumer>
-        {({ state, actions }) => (
-            <div>
-                <div>Left shown? {state.leftShown ? 'yes' : 'no'}</div>
+<CrystallizeLayout left={LeftComponent} right={RightComponent}>
+    <main>
+        <LayoutContext.Consumer>
+            {({ state, actions }) => (
                 <div>
-                    Right shown? {state.rightShown ? 'yes' : 'no'}
+                    <div>Left shown? {state.leftShown ? 'yes' : 'no'}</div>
+                    <div>
+                        Right shown? {state.rightShown ? 'yes' : 'no'}
+                    </div>
+                    <div>Content pushed: {state.contentPushed}</div>
+                    <button onClick={actions.showLeft}>Show left menu</button>
+                    <button onClick={actions.showRight}>Show right menu</button>
                 </div>
-                <div>Content pushed: {state.contentPushed}</div>
-                <button onClick={actions.toggleLeft}>Toggle left menu</button>
-                <button onClick={actions.toggleRight}>Toggle right menu</button>
-            </div>
-        )}
-    </LayoutContext.Consumer>
-)}
+            )}
+        </LayoutContext.Consumer>
+    </main>
 </CrystallizeLayout>
 ```
 
 ## Exports
 
 - (default) CrystallizeLayout
-- showLeft
-- hideLeft
-- toggleLeft
-- showRight
-- hideLeft
-- toggleRight
+- LayoutContext
+  - actions
+    - showLeft
+    - showRight
+    - hideLeft
+    - hideRight
+    - hideBoth
+    - toggleLeft
+    - toggleRight
+  - state
+    - leftShown
+    - rightShown
+    - contentPushed
 
 ## Component props
 
@@ -52,21 +60,9 @@ import CrystallizeLayout, { LayoutContext } from '@crystallize/react-layout';
 - width (for both left and right)
 - transitionProp ('left/right' or 'transform')
 
-## Passed props
-
-All direct children of CrystallizeLayout gets passed the following props
-
-### leftShown (boolean)
-
-Reflects if the left menu is shown
-
-### rightShown (boolean)
-
-Reflects if the right menu is shown
-
 ### contentPushed (string)
 
-Reflects the current offset the content has been pushed. Is usually
+Reflects the current offset the content has been pushed. Is by default
 
 - 300px (left menu is shown)
 - 0px (no menu is shown)

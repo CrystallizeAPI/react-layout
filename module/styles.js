@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const transitionEasing = 'cubic-bezier(0.41, 0.03, 0, 0.96)';
-
 const fullHeight = `
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
@@ -20,14 +18,14 @@ function getOuterLeft(props) {
 function setOuterMoveProperties(props) {
   if (props.transitionProp === 'transform') {
     return `
-      transition: transform ${props.speed}ms ${transitionEasing};
+      transition: transform ${props.speed}ms ${props.transitionEasing};
       will-change: transform;
       transform: translate3d(${getOuterLeft(props)}, 0, 0);
     `;
   }
 
   return `
-    transition: left ${props.speed}ms ${transitionEasing};
+    transition: left ${props.speed}ms ${props.transitionEasing};
     will-change: left;
     left: ${getOuterLeft(props)};
   `;
@@ -50,7 +48,7 @@ function setMoveProperties(side) {
 
     return `
       ${side}: -${value}px;
-      transition: ${side} ${props.speed}ms ${transitionEasing};
+      transition: ${side} ${props.speed}ms ${props.transitionEasing};
       will-change: ${side};
     `;
   };
@@ -80,7 +78,7 @@ export const Content = styled.div.attrs({
   ${p =>
     p.blurContentOnShow &&
     `
-    transition: filter ${p => p.speed}ms ${transitionEasing};
+    transition: filter ${p => p.speed}ms ${p => p.transitionEasing};
   `};
   ${p =>
     p.blurContentOnShow &&
@@ -112,7 +110,7 @@ export const Right = styled.div.attrs({
   ${fullHeight}
   overflow-x: hidden;
   overflow-y: auto;
-  transition: right ${p => p.speed}ms ${transitionEasing};
+  transition: right ${p => p.speed}ms ${p => p.transitionEasing};
   width: ${p => p.width || '300px'};
   ${setMoveProperties('right')};
 `;

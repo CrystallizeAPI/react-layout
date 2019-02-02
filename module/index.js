@@ -1,75 +1,22 @@
 import React, { Component } from 'react';
-import Emitter from 'tiny-emitter';
 import isCallable from 'is-callable';
 
 import { Outer, Left, Right, Content, ClickOverlay } from './styles';
 
-const defaultWidth = '300px';
+export const defaultWidth = '300px';
+export const defaultTransitionEasing = 'cubic-bezier(0.41, 0.03, 0, 0.96)';
+
+let speed = 250;
 
 // The minimal width in px for the pushed out content
-const minimalWidthForPushedOutContent = 65;
+export const minimalWidthForPushedOutContent = 65;
 
 export const LayoutContext = React.createContext();
 
-export const emitter = new Emitter();
-const showStatus = {
-  left: false,
-  right: false
-};
-let speed = 300;
-const toggleResolvers = [];
-
-function toggleSide(side, show) {
-  if (toggleResolvers.length > 0) {
-    toggleResolvers.forEach(r => {
-      if (!r.handeled) {
-        r.resolve(false);
-        r.handeled = true;
-      }
-    });
-  }
-
-  return new Promise(resolve => {
-    if (side === 'both') {
-      showStatus.left = false;
-      showStatus.right = false;
-    } else {
-      showStatus[side] = show;
-    }
-
-    emitter.emit('toggle', showStatus);
-
-    if (show && document.activeElement) {
-      document.activeElement.blur();
-    }
-
-    const resolver = {
-      type: `${show ? 'Show' : 'Hide'} ${side} side(s)`,
-      timeout: setTimeout(() => {
-        if (!resolver.handeled) {
-          resolver.resolve(true);
-        }
-        toggleResolvers.splice(toggleResolvers.indexOf(r => r === resolver), 1);
-      }, speed),
-      resolve
-    };
-
-    toggleResolvers.push(resolver);
-  });
-}
-
-export const toggleLeft = (show = !showStatus.left) => toggleSide('left', show);
-export const showLeft = () => toggleLeft(true);
-export const hideLeft = () => toggleLeft(false);
-export const toggleRight = (show = !showStatus.right) =>
-  toggleSide('right', show);
-export const showRight = () => toggleRight(true);
-export const hideRight = () => toggleRight(false);
-
 export default class CrystallizeLayout extends Component {
   state = {
-    showLeft: showStatus.left,
-    showRight: showStatus.right,
+    showLeft: false,
+    showRight: false,
     widthOverride: null
   };
 
@@ -84,15 +31,14 @@ export default class CrystallizeLayout extends Component {
   animating = false;
 
   componentDidMount() {
-    emitter.on('toggle', this.onToggle);
     speed = parseInt(this.props.speed || 300);
+
     this.listenForMediaChange();
     this.handleWindowResize();
     window.addEventListener('resize', this.handleWindowResize, false);
   }
 
   componentWillUnmount() {
-    emitter.off('toggle', this.onToggle);
     this.stopListenForMediaChange();
 
     window.removeEventListener('resize', this.handleWindowResize);
@@ -184,10 +130,15 @@ export default class CrystallizeLayout extends Component {
     return new Promise(resolve => {
       this.animating = true;
 
-      const disableScroll = left || right;
+      const showASide = left || right;
+
+      // Blur any active element
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
 
       // Ensure we disable scroll before the animation kicks in
-      if (disableScroll) {
+      if (showASide) {
         this.disableScroll(true);
       }
 
@@ -200,8 +151,8 @@ export default class CrystallizeLayout extends Component {
           setTimeout(() => {
             this.animating = false;
 
-            // Disable the scroll after the animation is done
-            if (!disableScroll) {
+            // Enable the scroll after the animation is done
+            if (!showASide) {
               this.disableScroll(false);
             }
 
@@ -214,25 +165,19 @@ export default class CrystallizeLayout extends Component {
 
   onOverlayClick = e => {
     e.preventDefault();
-    toggleSide('both');
-  };
-
-  renderChildren = additionalProps => {
-    const { children } = this.props;
-
-    // Render function
-    if (isCallable(children)) {
-      return children(additionalProps);
-    }
-
-    return React.Children.map(children, child => {
-      return React.cloneElement(child, additionalProps);
-    });
+    this.contextActions.hideBoth();
   };
 
   contextActions = {
-    toggleLeft: () => this.onToggle({ left: true }),
-    toggleRight: () => this.onToggle({ right: true })
+    showLeft: () => this.onToggle({ left: true, right: false }),
+    hideLeft: () => this.onToggle({ left: false }),
+    toggleLeft: () =>
+      this.onToggle({ left: !this.state.leftShown, right: false }),
+    showRight: () => this.onToggle({ right: true, left: false }),
+    hideRight: () => this.onToggle({ right: false }),
+    toggleRight: () =>
+      this.onToggle({ right: !this.state.rightShown, left: false }),
+    hideBoth: () => this.onToggle({ left: false, right: false })
   };
 
   render() {
@@ -240,10 +185,12 @@ export default class CrystallizeLayout extends Component {
       left,
       right,
       width = defaultWidth,
+      transitionEasing = defaultTransitionEasing,
       leftWidth,
       rightWidth,
       blurContentOnShow,
-      transitionProp = 'left'
+      transitionProp = 'left',
+      children
     } = this.props;
     const { widthOverride } = this.state;
 
@@ -292,6 +239,7 @@ export default class CrystallizeLayout extends Component {
           rightWidth={rightWidthToUse}
           speed={speed}
           transitionProp={transitionProp}
+          transitionEasing={transitionEasing}
         >
           {(showLeft || showRight) && (
             <ClickOverlay
@@ -301,6 +249,7 @@ export default class CrystallizeLayout extends Component {
               rightWidth={rightWidthToUse}
               onClick={this.onOverlayClick}
               transitionProp={transitionProp}
+              transitionEasing={transitionEasing}
             />
           )}
           <Content
@@ -309,8 +258,9 @@ export default class CrystallizeLayout extends Component {
             blurContentOnShow={blurContentOnShowProp}
             speed={speed}
             transitionProp={transitionProp}
+            transitionEasing={transitionEasing}
           >
-            {this.renderChildren(exposedState)}
+            {children}
           </Content>
           {LeftCmp && (
             <Left
@@ -318,6 +268,7 @@ export default class CrystallizeLayout extends Component {
               show={showLeft}
               speed={speed}
               transitionProp={transitionProp}
+              transitionEasing={transitionEasing}
             >
               <LeftCmp shown={showLeft} />
             </Left>
@@ -328,6 +279,7 @@ export default class CrystallizeLayout extends Component {
               show={showRight}
               speed={speed}
               transitionProp={transitionProp}
+              transitionEasing={transitionEasing}
             >
               <RightCmp shown={showRight} />
             </Right>

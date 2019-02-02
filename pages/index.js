@@ -1,36 +1,28 @@
 import React from 'react';
 import Head from 'next/head';
 
-import CrystallizeLayout, {
-  showRight,
-  showLeft,
-  hideLeft,
-  hideRight,
-  LayoutContext
-} from '../module';
+import CrystallizeLayout, { LayoutContext } from '../module';
 
 const left = () => (
   <aside>
     <div>Left menu</div>
-    <button onClick={hideLeft}>hide</button>
+    <LayoutContext.Consumer>
+      {({ actions }) => <button onClick={actions.hideLeft}>hide</button>}
+    </LayoutContext.Consumer>
   </aside>
 );
 const right = () => (
   <aside>
     <div>Right menu</div>
-    <button onClick={hideRight}>hide</button>
+    <LayoutContext.Consumer>
+      {({ actions }) => <button onClick={actions.hideRight}>hide</button>}
+    </LayoutContext.Consumer>
   </aside>
 );
 
 export default class Test extends React.Component {
   state = {
     transitionProp: 'left/right'
-  };
-
-  showLeft = async () => {
-    console.log('Showing left');
-    const shown = await showLeft();
-    console.log('Shown?', shown);
   };
 
   onChange = () => {
@@ -110,37 +102,38 @@ export default class Test extends React.Component {
               }
             `}</style>
             <main>
-              <div>
-                <h1>React layout</h1>
-                <div>
-                  Transition on{' '}
-                  <label>
-                    left/right{' '}
-                    <input
-                      type="radio"
-                      checked={transitionProp === 'left/right'}
-                      onChange={this.onChange}
-                    />
-                  </label>
-                  <label>
-                    transform
-                    <input
-                      type="radio"
-                      checked={transitionProp === 'transform'}
-                      onChange={this.onChange}
-                    />
-                  </label>
-                </div>
-                <br />
-                <div>
-                  <button onClick={this.showLeft}>Show left</button>
-                  <button onClick={showRight}>Show right</button>
-                </div>
-                <br />
-                <hr />
-                <div>
-                  <LayoutContext.Consumer>
-                    {({ state, actions }) => (
+              <LayoutContext.Consumer>
+                {({ state, actions }) => (
+                  <div>
+                    <h1>React layout</h1>
+                    <div>
+                      Transition on{' '}
+                      <label>
+                        left/right{' '}
+                        <input
+                          type="radio"
+                          checked={transitionProp === 'left/right'}
+                          onChange={this.onChange}
+                        />
+                      </label>
+                      <label>
+                        transform
+                        <input
+                          type="radio"
+                          checked={transitionProp === 'transform'}
+                          onChange={this.onChange}
+                        />
+                      </label>
+                    </div>
+                    <br />
+                    <div>
+                      <button onClick={actions.showLeft}>Show left</button>
+                      <button onClick={actions.showRight}>Show right</button>
+                    </div>
+                    <br />
+                    <hr />
+
+                    <div>
                       <div>
                         <div>Left shown? {state.leftShown ? 'yes' : 'no'}</div>
                         <div>
@@ -148,10 +141,10 @@ export default class Test extends React.Component {
                         </div>
                         <div>Content pushed: {state.contentPushed}</div>
                       </div>
-                    )}
-                  </LayoutContext.Consumer>
-                </div>
-              </div>
+                    </div>
+                  </div>
+                )}
+              </LayoutContext.Consumer>
             </main>
           </div>
         </CrystallizeLayout>
