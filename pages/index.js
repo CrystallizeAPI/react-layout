@@ -4,19 +4,21 @@ import Head from 'next/head';
 import CrystallizeLayout, {
   showRight,
   showLeft,
+  hideLeft,
+  hideRight,
   LayoutContext
 } from '../module';
 
 const left = () => (
   <aside>
     <div>Left menu</div>
-    <button onClick={() => alert('hey, you clicked me!')}>click</button>
+    <button onClick={hideLeft}>hide</button>
   </aside>
 );
 const right = () => (
   <aside>
     <div>Right menu</div>
-    <button onClick={() => alert('hey, you clicked me!')}>click</button>
+    <button onClick={hideRight}>hide</button>
   </aside>
 );
 
