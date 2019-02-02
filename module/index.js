@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import isCallable from 'is-callable';
 
 import { Outer, Left, Right, Content, ClickOverlay } from './styles';
 
