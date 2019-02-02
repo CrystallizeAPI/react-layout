@@ -1,3 +1,11 @@
+## <small>2.2.1 (2019-02-02)</small>
+
+* onToggle returns promise ([8ed3391](https://github.com/CrystallizeAPI/react-layout/commit/8ed3391))
+* Updated readme ([7bbe83a](https://github.com/CrystallizeAPI/react-layout/commit/7bbe83a))
+* Updated readme ([e7b1c3e](https://github.com/CrystallizeAPI/react-layout/commit/e7b1c3e))
+
+
+
 ## 2.2.0 (2019-01-31)
 
 * Added LayoutContext ([3c9d0e1](https://github.com/CrystallizeAPI/react-layout/commit/3c9d0e1))
