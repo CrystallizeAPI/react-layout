@@ -2,7 +2,7 @@
 
 # react-layout
 
-Helpers for setting up main layout with side menues. React components for building Crystallize powered [React commerce](https://crystallize.com/developers) with SSR using Next.js.
+Helpers for setting up main layout with side menus. React components for building Crystallize (GraphQL based [PIM](https://crystallize.com/product/product-information-management)) powered [React commerce](https://crystallize.com/developers) with SSR using Next.js. 
 
 ## Install
 
