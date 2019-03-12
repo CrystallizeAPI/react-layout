@@ -41,6 +41,7 @@ export default class CrystallizeLayout extends Component {
     this.stopListenForMediaChange();
 
     window.removeEventListener('resize', this.handleWindowResize);
+    this.disableScroll(false);
   }
 
   startWidthOverride = side => {
