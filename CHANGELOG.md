@@ -1,3 +1,10 @@
+## <small>3.0.1 (2019-03-12)</small>
+
+* Enable scroll on unmount ([8069e63](https://github.com/CrystallizeAPI/react-layout/commit/8069e63))
+* Update README.md ([d974c5d](https://github.com/CrystallizeAPI/react-layout/commit/d974c5d))
+
+
+
 ## 3.0.0 (2019-02-02)
 
 * Cleanup ([6d8ee1c](https://github.com/CrystallizeAPI/react-layout/commit/6d8ee1c))
