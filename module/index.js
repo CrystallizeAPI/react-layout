@@ -172,11 +172,11 @@ export default class CrystallizeLayout extends Component {
     showLeft: () => this.onToggle({ left: true, right: false }),
     hideLeft: () => this.onToggle({ left: false }),
     toggleLeft: () =>
-      this.onToggle({ left: !this.state.leftShown, right: false }),
+      this.onToggle({ left: !this.state.showLeft, right: false }),
     showRight: () => this.onToggle({ right: true, left: false }),
     hideRight: () => this.onToggle({ right: false }),
     toggleRight: () =>
-      this.onToggle({ right: !this.state.rightShown, left: false }),
+      this.onToggle({ right: !this.state.showRight, left: false }),
     hideBoth: () => this.onToggle({ left: false, right: false })
   };
 
